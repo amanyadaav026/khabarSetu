@@ -11,7 +11,7 @@ const PendingArticles = () => {
   const fetchPendingArticles = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/article/pending",
+        `${import.meta.env.VITE_API_URL}/api/article/pending`,
         {
           withCredentials: true,
         }
@@ -26,7 +26,7 @@ const PendingArticles = () => {
   const handleApprove = async (articleId) => {
     try {
       const res = await axios.put(
-        `http://localhost:8000/api/article/approve/${articleId}`,
+        `${import.meta.env.VITE_API_URL}/api/article/approve/${articleId}`,
         {},
         {
           withCredentials: true,
@@ -44,7 +44,7 @@ const PendingArticles = () => {
   const handleReject = async (articleId) => {
     try {
       const res = await axios.put(
-        `http://localhost:8000/api/article/reject/${articleId}`,
+        `${import.meta.env.VITE_API_URL}/api/article/reject/${articleId}`,
         {},
         {
           withCredentials: true,

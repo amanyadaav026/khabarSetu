@@ -11,7 +11,7 @@ const MyArticles = () => {
     const fetchArticles = async () => {
         try {
             const res = await axios.get(
-                "http://localhost:8000/api/article/my-articles",
+                `${import.meta.env.VITE_API_URL}/api/article/my-articles`,
             {
                 withCredentials: true,
             }
@@ -27,7 +27,7 @@ const MyArticles = () => {
     const handleDelete = async (articleId) => {
       try {
         const res = await axios.delete(
-          `http://localhost:8000/api/article/delete/${articleId}`,
+          `${import.meta.env.VITE_API_URL}/api/article/delete/${articleId}`,
         {
           withCredentials: true,
         }

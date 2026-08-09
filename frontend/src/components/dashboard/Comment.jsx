@@ -8,7 +8,7 @@ const Comment = ({ comment, fetchComments }) => {
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:8000/api/comment/delete/${comment._id}`,
+        `${import.meta.env.VITE_API_URL}/api/comment/delete/${comment._id}`,
         {
           withCredentials: true,
         }

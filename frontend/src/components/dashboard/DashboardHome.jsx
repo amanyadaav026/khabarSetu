@@ -41,7 +41,7 @@ const DashboardHome = () => {
     const fetchDashboardStats = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/dashboard/stats",
+          `${import.meta.env.VITE_API_URL}/api/dashboard/stats`,
           {
             withCredentials: true,
           }

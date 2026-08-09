@@ -27,7 +27,7 @@ const Home = () => {
 
   const fetchArticles = async ( query = "", category = "All" ) => {
     try {
-      let url = "http://localhost:8000/api/article";
+      let url = `${import.meta.env.VITE_API_URL}/api/article`;
 
       const params = [];
 
@@ -55,7 +55,7 @@ const Home = () => {
   const fetchSavedArticles = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/user/saved",
+        `${import.meta.env.VITE_API_URL}/api/user/saved`,
         {
           withCredentials: true,
         }
@@ -77,7 +77,7 @@ const Home = () => {
 
       if (isSaved) {
         const res = await axios.delete(
-          `http://localhost:8000/api/user/unsave/${articleId}`,
+          `${import.meta.env.VITE_API_URL}/api/user/unsave/${articleId}`,
           {
             withCredentials: true,
           }
@@ -86,7 +86,7 @@ const Home = () => {
         alert(res.data.message);
       } else {
         const res = await axios.post(
-          `http://localhost:8000/api/user/save/${articleId}`,
+          `${import.meta.env.VITE_API_URL}/api/user/save/${articleId}`,
           {},
           {
             withCredentials: true,

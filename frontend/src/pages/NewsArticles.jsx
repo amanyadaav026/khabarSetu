@@ -13,7 +13,7 @@ const NewsArticles = () => {
   const fetchArticles = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/article"
+        `${import.meta.env.VITE_API_URL}/api/article`
       );
 
       setArticles(res.data.articles);

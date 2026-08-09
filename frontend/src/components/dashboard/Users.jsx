@@ -11,7 +11,7 @@ const Users = () => {
   const fetchUsers = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/user/all-users",
+        `${import.meta.env.VITE_API_URL}/api/user/all-users`,
         {
           withCredentials: true,
         }
@@ -32,7 +32,7 @@ const Users = () => {
 
     try {
       const res = await axios.delete(
-        `http://localhost:8000/api/user/delete/${userId}`,
+        `${import.meta.env.VITE_API_URL}/api/user/delete/${userId}`,
         {
           withCredentials: true,
         }

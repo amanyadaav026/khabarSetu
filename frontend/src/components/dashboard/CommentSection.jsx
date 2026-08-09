@@ -13,7 +13,7 @@ const CommentSection = ({ articleId }) => {
   const fetchComments = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/comment/get/${articleId}`
+        `${import.meta.env.VITE_API_URL}/api/comment/get/${articleId}`
       );
 
       setComments(res.data);

@@ -77,7 +77,7 @@ const Profile = () => {
       dispatch(updateUserStart());
 
       const res = await axios.put(
-        `http://localhost:8000/api/user/update/${currentUser._id}`,
+        `${import.meta.env.VITE_API_URL}/api/user/update/${currentUser._id}`,
         formData,
         {
           withCredentials: true,
@@ -108,7 +108,7 @@ const Profile = () => {
 
     try {
       const res = await axios.delete(
-        `http://localhost:8000/api/user/delete/${currentUser._id}`,
+        `${import.meta.env.VITE_API_URL}/api/user/delete/${currentUser._id}`,
         {
           withCredentials: true,
         }
@@ -163,7 +163,7 @@ const Profile = () => {
       dispatch(updateUserStart());
 
       const updateRes = await axios.put(
-        `http://localhost:8000/api/user/update/${currentUser._id}`,
+        `${import.meta.env.VITE_API_URL}/api/user/update/${currentUser._id}`,
         {
         profilePhotoUrl: res.data.secure_url,
         },

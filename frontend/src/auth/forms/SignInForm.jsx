@@ -34,7 +34,7 @@ const SignInForm = () => {
   const onSubmit = async (values) => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/auth/signin",
+        `${import.meta.env.VITE_API_URL}/api/auth/signin`,
         values,
         {
           withCredentials: true,

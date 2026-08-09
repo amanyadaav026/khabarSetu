@@ -72,7 +72,7 @@ const CreatePost = () => {
   const fetchArticle = async () => {
     try {
         const res = await axios.get(
-          `http://localhost:8000/api/article/${articleId}`,
+          `${import.meta.env.VITE_API_URL}/api/article/${articleId}`,
           {
            withCredentials: true,
           }
@@ -126,7 +126,7 @@ const CreatePost = () => {
 
       if (isEditMode) {
         res = await axios.put(
-          `http://localhost:8000/api/article/update/${articleId}`,
+          `${import.meta.env.VITE_API_URL}/api/article/update/${articleId}`,
           {
             ...formData,
             imageUrl,
@@ -141,7 +141,7 @@ const CreatePost = () => {
         
       } else {
         res = await axios.post(
-          "http://localhost:8000/api/article/create",
+          `${import.meta.env.VITE_API_URL}/api/article/create`,
           {
             ...formData,
             imageUrl,

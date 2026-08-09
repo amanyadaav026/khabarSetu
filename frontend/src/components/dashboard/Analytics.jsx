@@ -13,10 +13,10 @@ const Analytics = () => {
   const fetchAnalytics = async () => {
     try {
       const [articlesRes, savedRes] = await Promise.all([
-        axios.get("http://localhost:8000/api/article/my-articles", {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/article/my-articles`, {
           withCredentials: true,
         }),
-        axios.get("http://localhost:8000/api/user/saved", {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/user/saved`, {
           withCredentials: true,
         }),
       ]);

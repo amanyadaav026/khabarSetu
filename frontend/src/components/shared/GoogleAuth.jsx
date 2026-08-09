@@ -33,7 +33,7 @@ const GoogleAuth = () => {
       const firebaseResponse = await signInWithPopup(auth, provider);
 
       const res = await axios.post(
-        "http://localhost:8000/api/auth/google",
+        `${import.meta.env.VITE_API_URL}/api/auth/google`,
         {
           name: firebaseResponse.user.displayName,
           email: firebaseResponse.user.email,

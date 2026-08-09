@@ -8,7 +8,7 @@ const SavedArticles = () => {
   const fetchSavedArticles = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/user/saved",
+        `${import.meta.env.VITE_API_URL}/api/user/saved`,
         {
           withCredentials: true,
         }

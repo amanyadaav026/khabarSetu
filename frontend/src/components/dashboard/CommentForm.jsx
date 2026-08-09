@@ -9,7 +9,7 @@ const CommentForm = ({ articleId, fetchComments }) => {
 
     try {
       await axios.post(
-        "http://localhost:8000/api/comment/create",
+        `${import.meta.env.VITE_API_URL}/api/comment/create`,
         {
           content,
           articleId,
