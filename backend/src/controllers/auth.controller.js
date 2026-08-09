@@ -173,8 +173,8 @@ export const google = async (req, res, next) => {
         .status(200)
         .cookie("access_token", token, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "strict",
+          secure: true,
+          sameSite: "none",
           maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         })
         .json({
@@ -232,8 +232,8 @@ export const google = async (req, res, next) => {
       .status(201)
       .cookie("access_token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
       .json({
@@ -257,8 +257,8 @@ export const signOut = async (req, res, next) => {
     res
       .clearCookie("access_token", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
       })
       .status(200)
       .json({
