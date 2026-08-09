@@ -26,3 +26,61 @@ The project focuses on providing a clean user experience while implementing real
 - 🛡️ Protected routes and role-based access
 - 📱 Responsive design for desktop and mobile devices
 - ⚡ Modern React-based user interface
+
+## Tech Stack
+
+### Frontend
+
+- React
+- Vite
+- Tailwind CSS
+- React Router
+- Redux Toolkit
+- Axios
+- Lucide React
+- shadcn/ui
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- bcryptjs
+
+### Services & Tools
+
+- Cloudinary — Image uploads
+- Firebase — Google Authentication
+- Git & GitHub — Version control
+
+## Project Structure
+
+```text
+khabarSetu/
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── middlewares/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── app.js
+│   │   └── index.js
+│   ├── package.json
+│   └── package-lock.json
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   ├── auth/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── lib/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   └── package-lock.json
+│
+├── .gitignore
+└── README.md
