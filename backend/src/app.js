@@ -13,7 +13,10 @@ const app = express();
 // CORS Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://khabar-setu-bfzh4p337-amanyadaav026s-projects.vercel.app",
+    ],
     credentials: true,
   })
 );
