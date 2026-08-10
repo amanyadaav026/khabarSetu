@@ -226,12 +226,12 @@ const Profile = () => {
 
            <form onSubmit={handleSubmit}>
 
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               
               <div className="flex flex-col items-center gap-6 lg:flex-row">
 
                 <div
-                  className="-mt-20 h-36 w-36 shrink-0 cursor-pointer overflow-hidden rounded-full border-8 border-white bg-white shadow-xl sm:-mt-20 sm:h-40 sm:w-40 lg:mt-0"
+                  className="-mt-20 h-36 w-36 shrink-0 cursor-pointer overflow-hidden rounded-full border-8 border-white bg-white shadow-xl sm:h-40 sm:w-40 lg:-mt-20"
                   onClick={() => filePickerRef.current.click()}
                 >
 
@@ -260,7 +260,7 @@ const Profile = () => {
                       className="w-full max-w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-2xl font-bold text-slate-900 outline-none sm:text-4xl lg:border-white/30 lg:bg-white/10 lg:text-white"
                     />
                   ) : (
-                    <h1 className="text-2xl font-bold text-slate-900 sm:text-4xl lg:text-white">
+                    <h1 className="text-2xl font-bold text-slate-900 sm:text-4xl">
                       {username}
                     </h1>
                   )}
@@ -274,7 +274,7 @@ const Profile = () => {
                       className="mt-2 w-full max-w-md rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none sm:text-lg lg:border-white/30 lg:bg-white/10 lg:text-white"
                     />
                   ) : (
-                    <p className="mt-2 break-all text-sm text-slate-500 sm:text-lg lg:text-slate-200">
+                    <p className="mt-2 break-all text-sm text-slate-500 sm:text-lg">
                       {email}
                     </p>
                   )}
