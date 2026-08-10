@@ -222,16 +222,16 @@ const Profile = () => {
 
           <div className="h-44 bg-linear-to-r from-slate-900 via-slate-800 to-red-600" />
 
-          <div className="relative -mt-24 px-8 pb-8">
+          <div className="relative px-4 pb-6 sm:px-8 sm:pb-8">
 
            <form onSubmit={handleSubmit}>
 
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               
               <div className="flex flex-col items-center gap-6 lg:flex-row">
 
                 <div
-                  className="h-40 w-40 overflow-hidden rounded-full border-8 border-white bg-white shadow-xl cursor-pointer"
+                  className="-mt-20 h-36 w-36 shrink-0 cursor-pointer overflow-hidden rounded-full border-8 border-white bg-white shadow-xl sm:-mt-20 sm:h-40 sm:w-40 lg:mt-0"
                   onClick={() => filePickerRef.current.click()}
                 >
 
@@ -257,10 +257,10 @@ const Profile = () => {
                       id="username"
                       value={formData.username}
                       onChange={handleChange}
-                      className="rounded-lg border border-white/30 bg-white/10 px-3 py-2 text-4xl font-bold text-white outline-none"
+                      className="w-full max-w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-2xl font-bold text-slate-900 outline-none sm:text-4xl lg:border-white/30 lg:bg-white/10 lg:text-white"
                     />
                   ) : (
-                    <h1 className="text-4xl font-bold text-white">
+                    <h1 className="text-2xl font-bold text-slate-900 sm:text-4xl lg:text-white">
                       {username}
                     </h1>
                   )}
@@ -271,21 +271,21 @@ const Profile = () => {
                       id="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="mt-2 w-full max-w-md rounded-lg border border-white/30 bg-white/10 px-3 py-2 text-lg text-white outline-none"
+                      className="mt-2 w-full max-w-md rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none sm:text-lg lg:border-white/30 lg:bg-white/10 lg:text-white"
                     />
                   ) : (
-                    <p className="mt-2 text-lg text-slate-200">
+                    <p className="mt-2 break-all text-sm text-slate-500 sm:text-lg lg:text-slate-200">
                       {email}
                     </p>
                   )}
 
-                  <div className="mt-4 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                  <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3 lg:justify-start">
 
-                    <span className="rounded-full bg-red-600 px-4 py-1 text-sm font-semibold text-white">
+                    <span className="rounded-full bg-red-600 px-3 py-1 text-xs font-semibold text-white sm:px-4 sm:text-sm">
                       {role}
                     </span>
 
-                    <span className="rounded-full bg-slate-200 px-4 py-1 text-sm font-medium text-slate-700">
+                    <span className="rounded-full bg-slate-200 px-3 py-1 text-xs font-medium text-slate-700 sm:px-4 sm:text-sm">
                       Verified Account
                     </span>
 
@@ -298,33 +298,33 @@ const Profile = () => {
               {!editMode ? (
                 <button
                   onClick={() => setEditMode(true)}
-                  className="flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 font-medium text-white transition hover:bg-red-600"
+                  className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 font-medium text-white transition hover:bg-red-600 lg:mt-0 lg:w-auto"
                 >
                   <Pencil size={18} />
                   Edit Profile
                 </button>
               ) : (
-                <div className="flex gap-3">
+                <div className="mt-2 flex w-full gap-3 lg:mt-0 lg:w-auto">
                   <button
                     type="submit"
-                    className="rounded-xl bg-green-600 px-6 py-3 font-medium text-white transition hover:bg-green-700"
+                    className="flex-1 rounded-xl bg-green-600 px-6 py-3 font-medium text-white transition hover:bg-green-700 lg:flex-none"
                   >
                     Save Changes
                   </button>
 
                   <button
                     onClick={() => setEditMode(false)}
-                    className="rounded-xl bg-slate-600 px-6 py-3 font-medium text-white transition hover:bg-slate-700"
+                    className="flex-1 rounded-xl bg-slate-600 px-6 py-3 font-medium text-white transition hover:bg-slate-700 lg:flex-none"
                   >
                     Cancel
                   </button>
                 </div>
               )}
-              <div className="mt-6 flex justify-center"> 
+              <div className="mt-4 flex w-full justify-center lg:mt-0 lg:w-auto">
                 <button
                   type="button"
                   onClick={handleDeleteAccount}
-                  className="flex items-center gap-2 text-red-600 font-medium transition hover:text-red-700 hover:underline"
+                  className="flex items-center gap-2 py-2 font-medium text-red-600 transition hover:text-red-700 hover:underline"
                 >
                   <Trash2 size={18} />
                   Delete Account
