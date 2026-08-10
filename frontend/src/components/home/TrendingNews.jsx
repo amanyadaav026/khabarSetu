@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const TrendingNews = ({ articles }) => {
+
+  const navigate = useNavigate();
 
   const trendingArticles = articles.slice(0, 3);
 
@@ -26,11 +29,14 @@ const TrendingNews = ({ articles }) => {
             <img
               src={article.imageUrl}
               alt={article.title}
-              className="h-48 w-full rounded-xl object-cover sm:h-40"
+              onClick={() => navigate(`/article/${article._id}`)}
+              className="h-48 w-full cursor-pointer rounded-xl object-cover transition-transform duration-300 hover:scale-[1.02] sm:h-40"
             />
 
 
-            <h3 className="mt-3 text-lg font-bold leading-6 sm:mt-4 sm:text-xl">
+            <h3 
+              onClick={() => navigate(`/article/${article._id}`)}
+              className="mt-3 cursor-pointer text-lg font-bold leading-6 transition-colors hover:text-red-600 sm:mt-4 sm:text-xl">
               {article.title}
             </h3>
 
