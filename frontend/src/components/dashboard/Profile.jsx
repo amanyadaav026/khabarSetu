@@ -51,11 +51,16 @@ const stats = [
 ];
 
 const Profile = () => {
+  console.log("PROFILE RENDER", Date.now());
+  
+
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [editMode, setEditMode] = useState(false);
+  console.log("EDIT MODE:", editMode);
+
   const [formData, setFormData] = useState({
     username: currentUser?.username || currentUser?.name || "",
     email: currentUser?.email || "",
@@ -225,7 +230,6 @@ const Profile = () => {
           <div className="relative px-4 pb-6 sm:px-8 sm:pb-8">
 
            <form onSubmit={handleSubmit}>
-
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               
               {/* Profile Info */}
@@ -234,7 +238,7 @@ const Profile = () => {
                 {/* Profile Image */}
                 <div
                   className="-mt-20 h-36 w-36 shrink-0 cursor-pointer overflow-hidden rounded-full border-8 border-white bg-white shadow-xl sm:h-40 sm:w-40 lg:-mt-20"
-                  onClick={() => filePickerRef.current.click()}
+                  onClick={() => filePickerRef.current?.click()}
                 >
                   {imageFileUrl || profilePhoto ? (
                     <img
@@ -243,104 +247,104 @@ const Profile = () => {
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-slate-200">
-                    <User size={70} className="text-slate-500" />
-                  </div>
-                )}
-              </div>
-              
-              {/* Name + Email */}
-              <div className="w-full text-center lg:w-auto lg:text-left">
-                
-                {editMode ? (
-                  <input
-                    type="text"
-                    id="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-2xl font-bold text-slate-900 outline-none focus:border-red-500 sm:text-4xl lg:max-w-sm"
-                  />
-                ) : (
-                  <h1 className="text-2xl font-bold text-slate-900 sm:text-4xl">
-                    {username}
-                  </h1>
-                )}
-                
-                {editMode ? (
-                  <input
-                    type="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-red-500 sm:text-lg lg:max-w-md"
-                  />
-                ) : (
-                  <p className="mt-2 break-all text-sm text-slate-500 sm:text-lg">
-                    {email}
-                  </p>
-                )}
-
-                {/* Badges */}
-                <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3 lg:justify-start">
-                  
-                  <span className="rounded-full bg-red-600 px-3 py-1 text-xs font-semibold text-white sm:px-4 sm:text-sm">
-                    {role}
-                  </span>
-
-                  <span className="rounded-full bg-slate-200 px-3 py-1 text-xs font-medium text-slate-700 sm:px-4 sm:text-sm">
-                    Verified Account
-                  </span>
-
+                    <div className="flex h-full w-full items-center justify-center bg-slate-200">
+                      <User size={70} className="text-slate-500" />
+                    </div>
+                  )}
                 </div>
 
+                {/* Name + Email */}
+                <div className="w-full text-center lg:w-auto lg:text-left">
+
+                  {editMode ? (
+                    <input
+                      type="text"
+                      id="username"
+                      value={formData.username}
+                      onChange={handleChange}
+                      className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-2xl font-bold text-slate-900 outline-none focus:border-red-500 sm:text-4xl lg:max-w-sm"
+                    />
+                  ) : (
+                    <h1 className="text-2xl font-bold text-slate-900 sm:text-4xl">
+                      {username}
+                    </h1>
+                  )}
+
+                  {editMode ? (
+                    <input
+                      type="email"
+                      id="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-red-500 sm:text-lg lg:max-w-md"
+                    />
+                  ) : (
+                    <p className="mt-2 break-all text-sm text-slate-500 sm:text-lg">
+                      {email}
+                    </p>
+                  )}
+
+                  <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3 lg:justify-start">
+                    <span className="rounded-full bg-red-600 px-3 py-1 text-xs font-semibold text-white sm:px-4 sm:text-sm">
+                      {role}
+                    </span>
+
+                    <span className="rounded-full bg-slate-200 px-3 py-1 text-xs font-medium text-slate-700 sm:px-4 sm:text-sm">
+                      Verified Account
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            {/* ACTION BUTTONS */}
-            <div className="flex w-full flex-col gap-3 lg:w-auto lg:flex-row lg:items-center">
+              {/* ACTION BUTTONS */}
+              <div className="flex w-full flex-col gap-3 lg:w-auto lg:flex-row lg:items-center">
 
-              {!editMode ? (
-                <button
-                  type="button"
-                  onClick={() => setEditMode(true)}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 font-medium text-white transition hover:bg-red-600 lg:w-auto"
-               >
-                  <Pencil size={18} />
-                  Edit Profile
-                </button>
-              ) : (
-                <>
-                  <button
-                    type="submit"
-                    className="w-full rounded-xl bg-green-600 px-6 py-3 font-medium text-white transition hover:bg-green-700 lg:w-auto"
-                  >
-                    Save Changes
-                  </button>
-
+                {!editMode ? (
                   <button
                     type="button"
-                    onClick={() => setEditMode(false)}
-                    className="w-full rounded-xl bg-slate-600 px-6 py-3 font-medium text-white transition hover:bg-slate-700 lg:w-auto"
+                    onClick={() => setEditMode(true)}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 font-medium text-white transition hover:bg-red-600 lg:w-auto"
                   >
-                    Cancel
+                    <Pencil size={18} />
+                    Edit Profile
                   </button>
+                ) : (
+                  <>
+                    <button
+                      type="submit"
+                      className="w-full rounded-xl bg-green-600 px-6 py-3 font-medium text-white transition hover:bg-green-700 lg:w-auto"
+                    >
+                      Save Changes
+                    </button>
 
-                  <button
-                    type="button"
-                    onClick={handleDeleteAccount}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 font-medium text-red-600 transition hover:bg-red-50 hover:text-red-700 lg:w-auto"
-                  >
-                    <Trash2 size={18} />
-                    Delete Account
-                  </button>
-                </>
-              )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFormData({
+                          username: currentUser?.username || currentUser?.name || "",
+                          email: currentUser?.email || "",
+                        });
+                        setEditMode(false);
+                      }}
+                      className="w-full rounded-xl bg-slate-600 px-6 py-3 font-medium text-white transition hover:bg-slate-700 lg:w-auto"
+                    >
+                      Cancel
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleDeleteAccount}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 font-medium text-red-600 transition hover:bg-red-50 hover:text-red-700 lg:w-auto"
+                    >
+                      <Trash2 size={18} />
+                      Delete Account
+                    </button>
+                  </>
+                )}
+              </div>
 
             </div>
-
-          </div>
-
-           </form> 
+           </form>
 
           </div>
 
