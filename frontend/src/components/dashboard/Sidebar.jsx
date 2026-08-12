@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   SquarePen,
@@ -12,10 +12,15 @@ import {
   Settings,
   LogOut,
 } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { signOutSuccess } from "../../app/user/userSlice";
 
 const Sidebar = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
   console.log(currentUser);
 
   const menuItems = [
@@ -100,7 +105,29 @@ const Sidebar = () => {
         ))}
       </nav>
 
-      <button className="mt-8 flex w-full items-center gap-3 rounded-lg p-3 text-gray-700 transition-colors hover:bg-gray-100">
+      <button 
+        onClick={async () => {
+          try{
+            const res = await fetch(
+              `${import.meta.env.VITE_API_URL}/api/auth/signout`,
+              {
+                method: "POST",
+                credentials: "include",
+              }
+            );
+            
+            if (!res.ok) {
+              throw new Error("Logout failed");
+            }
+
+            dispatch(signOutSuccess());
+            navigate("/sign-in");
+
+          } catch (error) {
+            console.error("Logout error:", error);
+          }
+        }}
+        className="mt-8 flex w-full items-center gap-3 rounded-lg p-3 text-gray-700 transition-colors hover:bg-gray-100">
         <LogOut size={20} />
         Logout
       </button>
