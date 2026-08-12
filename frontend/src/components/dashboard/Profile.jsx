@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -58,8 +60,8 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
-  const [editMode, setEditMode] = useState(false);
-  console.log("EDIT MODE:", editMode);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const editMode = searchParams.get("edit") === "true";
 
   const [formData, setFormData] = useState({
     username: currentUser?.username || currentUser?.name || "",
@@ -90,7 +92,10 @@ const Profile = () => {
       );  
 
       dispatch(updateUserSuccess(res.data.user));
-      setEditMode(false);
+
+      searchParams.delete("edit");
+      setSearchParams(searchParams);
+      
 
     } catch (error) {
       dispatch(
@@ -270,7 +275,7 @@ const Profile = () => {
                     </h1>
                   )}
 
-                  {editMode ? (
+                  {editMode  ? (
                     <input
                       type="email"
                       id="email"
@@ -299,10 +304,13 @@ const Profile = () => {
               {/* ACTION BUTTONS */}
               <div className="flex w-full flex-col gap-3 lg:w-auto lg:flex-row lg:items-center">
 
-                {!editMode ? (
+                {!editMode  ? (
                   <button
                     type="button"
-                    onClick={() => setEditMode(true)}
+                    onClick={() =>  {
+                      searchParams.set("edit", "true");
+                      setSearchParams(searchParams);
+                    }}
                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3 font-medium text-white transition hover:bg-red-600 lg:w-auto"
                   >
                     <Pencil size={18} />
@@ -324,7 +332,8 @@ const Profile = () => {
                           username: currentUser?.username || currentUser?.name || "",
                           email: currentUser?.email || "",
                         });
-                        setEditMode(false);
+                        searchParams.delete("edit");
+                        setSearchParams(searchParams);
                       }}
                       className="w-full rounded-xl bg-slate-600 px-6 py-3 font-medium text-white transition hover:bg-slate-700 lg:w-auto"
                     >
@@ -349,15 +358,6 @@ const Profile = () => {
           </div>
 
         </div>
-
-        {/* 👇 Add it here */}
-        {editMode && (
-          <div className="mt-4 text-center">
-            <span className="inline-flex rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-600">
-              Edit Mode Enabled
-            </span>
-          </div>
-        )}
 
         {/* Statistics */}
 
