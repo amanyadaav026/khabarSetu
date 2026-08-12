@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,9 +13,42 @@ import axios from "axios";
 
 const formSchema = z
   .object({
-    username: z.string().min(3, "Username must be at least 3 characters"),
-    email: z.string().email("Enter a valid email"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
+    username: z
+      .string()
+      .trim()
+      .min(3, "Username must be at least 3 characters")
+      .max(20, "Username must be at most 20 characters")
+      .regex(
+        /^[a-zA-Z0-9_]+$/,
+        "Username can contain only letters, numbers and underscore"
+      ),
+
+    email: z
+      .string()
+      .trim()
+      .email("Enter a valid email"),
+
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(64, "Password must be at most 64 characters")
+      .regex(
+        /[A-Z]/,
+        "Password must contain at least one uppercase letter"
+      )
+      .regex(
+        /[a-z]/,
+        "Password must contain at least one lowercase letter"
+      )
+      .regex(
+        /[0-9]/,
+        "Password must contain at least one number"
+      )
+      .regex(
+        /[^A-Za-z0-9]/,
+        "Password must contain at least one special character"
+      ),
+
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -24,9 +57,12 @@ const formSchema = z
   });
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(formSchema),
@@ -45,6 +81,10 @@ const SignUpForm = () => {
 
 
       alert("Signup Successful!");
+
+      reset();
+
+      navigate("/sign-in", { replace: true });
 
       // Baad me yaha navigate("/sign-in") karenge
 

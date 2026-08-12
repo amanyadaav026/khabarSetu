@@ -7,30 +7,68 @@ export const signupUser = async (req, res, next) => {
         const { username, email, password } = req.body;
 
         // Validation
-        if (
-            !username?.trim() ||
-            !email?.trim() ||
-            !password?.trim()
-        ) {
+        if (!username?.trim() || !email?.trim() || !password) {
+            return res.status(400).json({
+              success: false,
+              message: "All fields are required"
+            });
+        }
+
+        // Clean username and email
+        const cleanUsername = username.trim();
+        const cleanEmail = email.trim().toLowerCase();
+
+        // Username validation
+        if (!/^[a-zA-Z0-9_]{3,20}$/.test(cleanUsername)) {
             return res.status(400).json({
                 success: false,
-                message: "All fields are required"
+                message:
+                    "Username must be 3-20 characters and contain only letters, numbers and underscore"
             });
         }
 
         // Password length validation
-        if (password.length < 6) {
+        if (password.length < 8 || password.length > 64) {
             return res.status(400).json({
                 success: false,
-                message: "Password must be at least 6 characters long"
+                message: "Password must be between 8 and 64 characters"
+            });
+        }
+
+        // Password strength validation
+        if (!/[A-Z]/.test(password)) {
+            return res.status(400).json({
+                success: false,
+                message: "Password must contain at least one uppercase letter"
+            });
+        }
+
+        if (!/[a-z]/.test(password)) {
+            return res.status(400).json({
+                success: false,
+                message: "Password must contain at least one lowercase letter"
+            });
+        }
+
+        if (!/[0-9]/.test(password)) {
+            return res.status(400).json({
+                success: false,
+                message: "Password must contain at least one number"
+            });
+        }
+
+        if (!/[^A-Za-z0-9]/.test(password)) {
+            return res.status(400).json({
+                success: false,
+                message: "Password must contain at least one special character"
             });
         }
 
         // Check if username or email already exists
         const existingUser = await User.findOne({
             $or: [
-                { email: email.toLowerCase() },
-                { username }
+                { email: cleanEmail },
+                { username: cleanUsername }
             ]
         });
 
@@ -46,8 +84,8 @@ export const signupUser = async (req, res, next) => {
 
         // Create user
         const newUser = new User({
-            username,
-            email: email.toLowerCase(),
+            username: cleanUsername,
+            email: cleanEmail,
             password: hashedPassword
         });
 
