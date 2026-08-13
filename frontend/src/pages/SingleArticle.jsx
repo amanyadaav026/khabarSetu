@@ -118,7 +118,7 @@ const SingleArticle = () => {
       <div className="relative mt-5">
         <button
           onClick={() => setShowShareMenu((prev) => !prev)}
-          className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
+          className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
         >
           <Share2 size={17} />
           Share
