@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Share2, Copy, Check, MessageCircle } from "lucide-react";
@@ -11,9 +11,28 @@ const SingleArticle = () => {
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const shareMenuRef = useRef(null);
+
   useEffect(() => {
     fetchArticle();
   }, [articleId]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        shareMenuRef.current &&
+        !shareMenuRef.current.contains(event.target)
+      ) {
+        setShowShareMenu(false);
+      }
+    };
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const fetchArticle = async () => {
     try {
@@ -115,7 +134,7 @@ const SingleArticle = () => {
       </div>
 
       {/* Share Article */}
-      <div className="relative mt-5">
+      <div ref={shareMenuRef} className="relative mt-5">
         <button
           onClick={() => setShowShareMenu((prev) => !prev)}
           className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700"
