@@ -14,9 +14,6 @@ const SavedArticles = () => {
         }
       );
 
-
-      console.log("Saved Articles Response:", res.data);
-
       setSavedArticles(res.data.savedArticles);
     } catch (error) {
       console.error("Error fetching saved articles:", error);

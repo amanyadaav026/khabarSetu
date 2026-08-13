@@ -9,7 +9,10 @@ export const getDashboardStats = async (req, res, next) => {
 
     const user = await User.findById(req.user.userId);
 
-    const savedArticles = user.savedArticles.length;
+    const savedArticles = await Article.countDocuments({
+      _id: { $in: user.savedArticles },
+    });
+
 
     const viewsResult = await Article.aggregate([
       {

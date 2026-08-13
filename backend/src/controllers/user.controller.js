@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js";
+import Article from "../models/article.model.js";
 
 export const updateUser = async (req, res, next) => {
   try {
@@ -69,7 +70,6 @@ export const saveArticle = async (req, res, next) => {
     const { articleId } = req.params;
 
     const user = await User.findById(req.user.userId);
-    console.log("USER FROM DATABASE:", user);
 
     if (!user) {
       return res.status(404).json({
@@ -126,9 +126,7 @@ export const unsaveArticle = async (req, res, next) => {
 
 export const getSavedArticles = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.userId).populate(
-      "savedArticles"
-    );
+    const user = await User.findById(req.user.userId);
 
     if (!user) {
       return res.status(404).json({
@@ -137,9 +135,14 @@ export const getSavedArticles = async (req, res, next) => {
       });
     }
 
+    const savedArticles = await Article.find({
+      _id: { $in: user.savedArticles },
+    }).sort({ createdAt: -1 });
+
+
     res.status(200).json({
       success: true,
-      savedArticles: user.savedArticles,
+      savedArticles,
     });
   } catch (error) {
     next(error);
