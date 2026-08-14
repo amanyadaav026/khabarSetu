@@ -12,15 +12,15 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
+
   useEffect(() => {
-    fetchArticles();
     fetchSavedArticles();
   }, []);
 
   useEffect(() => {
     const delay = setTimeout(() => {
       fetchArticles(search, selectedCategory);
-    }, 400);  
+    }, 400);
 
     return () => clearTimeout(delay);
   }, [search, selectedCategory]);
@@ -44,7 +44,7 @@ const Home = () => {
       }
 
       const res = await axios.get(url);
-
+      
       setArticles(res.data.articles);
 
     } catch (error) {

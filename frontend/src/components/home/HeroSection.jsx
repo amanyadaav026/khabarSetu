@@ -8,7 +8,7 @@ const HeroSection = ({ article, latestArticles }) => {
   if (!article) return null;
 
   return (
-    <section className="mt-10">
+    <section className="mt-10 [overflow-anchor:none]">
 
       {/* Top Layout */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.8fr_0.8fr] lg:gap-5">
@@ -21,7 +21,8 @@ const HeroSection = ({ article, latestArticles }) => {
             src={article.imageUrl}
             alt={article.title}
             onClick={() => navigate(`/article/${article._id}`)}
-            className="h-105 w-full cursor-pointer object-cover transition-transform duration-700 hover:scale-105 sm:h-120 lg:h-150"
+            className="block h-105 w-full cursor-pointer object-cover transition-transform duration-700 hover:scale-105 sm:h-120 lg:h-150"
+            loading="eager"
           />
 
           {/* Dark Gradient */}
@@ -88,7 +89,8 @@ const HeroSection = ({ article, latestArticles }) => {
                 <img
                   src={item.imageUrl}
                   alt={item.title}
-                  className="h-16 w-16 shrink-0 rounded-xl object-cover transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24"
+                  className="block h-16 w-16 shrink-0 rounded-xl object-cover transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24"
+                  loading="eager"
                 />
 
                 <div className="flex-1">
